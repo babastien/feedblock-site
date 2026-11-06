@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FeedBlock</title>
+<meta name="description" content="FeedBlock bloque les fils et les vidéos courtes de tes applications, sans bloquer le reste.">
+<link rel="icon" href="logo.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+ <a class="brand" href="index.html"><img src="logo.svg" alt="">FeedBlock</a>
+ <nav><a href="index.html">Accueil</a><a href="aide.html">Aide</a><a href="confidentialite.html">Confidentialité</a></nav>
+</header>
+
+<div class="hero">
+ <div>
+  <h1>Garde tes applications,<br>pas les distractions</h1>
+  <p class="lead">FeedBlock te protège du défilement sans fin des Reels, Shorts et autres fils, tout en préservant les fonctionnalités utiles de tes applications.</p>
+  <p class="lead">Les fils ne s'affichent plus automatiquement lorsque tu ouvres une application : c'est toi qui décides quand et combien de temps y accéder.</p>
+  <a class="btn off">Bientôt sur Google Play</a>
+  <div class="note">Android uniquement · Essai Pro 7 jours gratuits</div>
+ </div>
+ <div class="phones">
+  <div class="demo" id="demo" role="img" aria-label="Écran de blocage de FeedBlock sur Instagram : un appui long sur le sablier ouvre le fil pour un temps limité">
+   <img src="fil.jpg" alt="">
+   <img class="mask" src="masque.jpg" alt="">
+   <div class="count"><span class="ct">Accès au fil · Reste 15 min</span><i class="track"><b></b></i></div>
+   <div class="pill"><small>Restant</small><span class="pt">15:00</span></div>
+   <svg class="hand" viewBox="0 0 24 24"><path fill="#F3F5F6" stroke="#111" stroke-width="1.2" stroke-linejoin="round" d="M8.5,13.5V4A1.5,1.5 0,0 1,11.5 4V10A1.5,1.5 0,0 1,14.5 10V11A1.5,1.5 0,0 1,17.5 11V12A1.5,1.5 0,0 1,20.5 12V16C20.5,19.5 18,22 14.5,22H12.5C10.5,22 9,21 8,19.5L4.6,14.6A1.4,1.4 0,0 1,6.6 12.6L8.5,14.5Z"/><path fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" d="M11.5,10V13M14.5,11V13.5M17.5,12V14"/></svg>
+  </div>
+ </div>
+ <script>
+ // Même démonstration que le premier lancement (MaskDemo) : positions relevées sur les captures de 1080 x 2312.
+ (function(){
+  const d=document.getElementById('demo'),mask=d.querySelector('.mask'),count=d.querySelector('.count'),ct=d.querySelector('.ct'),
+   track=d.querySelector('.track'),fill=track.firstChild,pill=d.querySelector('.pill'),pt=d.querySelector('.pt'),hand=d.querySelector('.hand');
+  const size=()=>d.style.setProperty('--k',d.clientWidth/360);size();addEventListener('resize',size);
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  async function loop(){
+   for(;;){
+    mask.style.opacity=1;count.style.opacity=1;pill.style.visibility='hidden';
+    ct.textContent='Accès au fil · Reste 15 min';ct.classList.remove('on');track.style.visibility='hidden';fill.style.transform='scaleX(0)';
+    await wait(1400);
+    hand.setAttribute('class','hand in');await wait(350);hand.setAttribute('class','hand in down');
+    ct.classList.add('on');track.style.visibility='visible';
+    const t0=performance.now();
+    while(true){const k=Math.min(1,(performance.now()-t0)/5000);ct.textContent='Accès au fil dans '+Math.max(1,Math.ceil(5-k*5));fill.style.transform='scaleX('+k+')';if(k>=1)break;await wait(30);}
+    hand.setAttribute('class','hand');mask.style.opacity=0;count.style.opacity=0;
+    let s=900;pt.textContent='15:00';
+    await wait(700);pill.style.visibility='visible';await wait(200);
+    for(let i=0;i<5;i++){await wait(1000);s--;pt.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+    await wait(500);
+   }
+  }
+  loop();
+ })();
+ </script>
+</div>
+
+<section>
+ <h2>Pourquoi utiliser FeedBlock ?</h2>
+ <div class="questions">
+  <p>Tu passes trop de temps sur ton téléphone et tu aimerais changer ça ?</p>
+  <p>Tu veux continuer à suivre tes amis sans subir les contenus qu'on t'impose ?</p>
+  <p>Tu ouvres une application pour publier, mais tu te fais happer par le défilement sans fin ?</p>
+  <b>FeedBlock est fait pour toi.</b>
+ </div>
+</section>
+
+<section>
+ <h2>Les applications prises en charge</h2>
+ <p class="sub">Tu choisis lesquelles protéger.</p>
+ <div class="apps">
+  <div class="app"><div class="tile ig">IG</div>Instagram</div>
+  <div class="app"><div class="tile" style="background:#0866ff">FB</div>Facebook</div>
+  <div class="app"><div class="tile yt"><span>YT</span></div>YouTube</div>
+  <div class="app"><div class="tile" style="background:linear-gradient(135deg,#25f4ee,#000 30%,#000 70%,#fe2c55)">TT</div>TikTok</div>
+  <div class="app"><div class="tile sc" style="background:#fffc00">SC</div>Snapchat</div>
+  <div class="app"><div class="tile" style="background:#000">X</div>X</div>
+  <div class="app"><div class="tile" style="background:#0a66c2">IN</div>LinkedIn</div>
+  <div class="app"><div class="tile" style="background:#e60023">P</div>Pinterest</div>
+  <div class="app"><div class="tile" style="background:#ff4500">R</div>Reddit</div>
+ </div>
+ <p class="keep">Messages, recherche, profils, notifications et publication restent toujours accessibles sur chacune des applications.</p>
+</section>
+
+<section id="fonctions">
+ <h2 style="margin-bottom:28px">Comment FeedBlock va t'aider</h2>
+ <div class="features">
+  <div class="feature"><div class="ico"><img src="icons/ic_tab_protection.svg" alt=""></div><div><b>Applications protégées</b><span>Les fils et les vidéos courtes des applications choisies sont bloqués.</span></div></div>
+  <div class="feature"><div class="ico"><img src="icons/ic_web.svg" alt=""></div><div><b>Sites web protégés</b><span>Les versions web des applications sont aussi bloquées dans les navigateurs.</span></div></div>
+  <div class="feature"><div class="ico"><img src="icons/ic_free_time.svg" alt=""></div><div><b>Accès limité au fil</b><span>Un temps par jour où tu peux ouvrir le fil de manière consciente.</span></div></div>
+  <div class="feature"><div class="ico"><img src="icons/ic_protected_hours.svg" alt=""></div><div><b>Horaires protégés</b><span>Des créneaux horaires que tu définis, où l'accès au fil reste impossible.</span></div></div>
+  <div class="feature"><div class="ico"><img src="icons/ic_lock.svg" alt=""></div><div><b>Verrouillage</b><span>Empêche d'arrêter ou de modifier la protection sur un coup de tête.</span></div></div>
+  <div class="feature"><div class="ico"><img src="icons/ic_idea.svg" alt=""></div><div><b>Actions positives</b><span>Des choses à faire à la place de défiler, proposées sur l'écran de blocage.</span></div></div>
+ </div>
+</section>
+
+<section id="prix">
+ <h2>Free ou Pro</h2>
+ <p class="sub">Essai Pro 7 jours gratuits. Rien n'est prélevé pendant 7 jours.</p>
+ <div class="plans">
+  <div class="plan">
+   <h3>Free</h3><div class="price">Gratuit (sans limite de durée)</div>
+   <ul><li>1 application protégée</li><li>Accès limité au fil (1 h par jour)</li><li>Statistiques</li></ul>
+  </div>
+  <div class="plan pro">
+   <h3>Pro</h3><div class="price">2,99 € par mois ou 23,99 € par an (soit 1,99 €/mois)</div>
+   <ul><li>Toutes les applications</li><li>Sites web protégés</li><li>Accès limité au fil réglable</li><li>Horaires protégés</li><li>Verrouillage</li><li>Actions positives</li><li>Halos de couleur</li></ul>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="privacy">
+  <div class="ico" style="width:46px;height:46px"><img src="icons/confidentialite.svg" alt="" style="width:24px;height:24px"></div>
+  <p>Tes données restent privées et ne quittent jamais ton appareil. <a href="confidentialite.html">En savoir plus</a></p>
+ </div>
+</section>
+
+<footer>
+ <span>© 2026 FeedBlock</span>
+ <span><a href="aide.html">Aide</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="mailto:support@feedblock.app">support@feedblock.app</a></span>
+</footer>
+</div>
+</body>
+</html>
