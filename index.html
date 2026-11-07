@@ -21,12 +21,12 @@
   <p class="lead">FeedBlock te protège du défilement sans fin des Reels, Shorts et autres fils, tout en préservant les fonctionnalités utiles de tes applications.</p>
   <p class="lead">Les fils ne s'affichent plus automatiquement lorsque tu ouvres une application : c'est toi qui décides quand et combien de temps y accéder.</p>
   <a class="btn off">Bientôt sur Google Play</a>
-  <div class="note">Android uniquement</div>
+  <div class="note"><svg class="droid" viewBox="0 0 24 24" aria-hidden="true"><path fill="#3DDC84" d="M2.5,18A9.5,9.5 0 0 1 21.5,18Z"/><path stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round" d="M6.6,10.4L4.8,7.4M17.4,10.4L19.2,7.4"/><circle cx="8" cy="14.3" r="1.15" fill="#0b0d0f"/><circle cx="16" cy="14.3" r="1.15" fill="#0b0d0f"/></svg>Android uniquement</div>
  </div>
  <div class="phones">
   <div class="demo" id="demo" role="img" aria-label="Écran de blocage de FeedBlock sur Instagram : un appui long sur le sablier ouvre le fil pour un temps limité">
-   <img src="fil.jpg" alt="">
-   <img class="mask" src="masque.jpg" alt="">
+   <img src="fil.jpg" alt="" draggable="false">
+   <img class="mask" src="masque.jpg" alt="" draggable="false">
    <div class="count"><span class="ct">Accès au fil · Reste 15 min</span><i class="track"><b></b></i></div>
    <div class="pill"><small>Restant</small><span class="pt">15:00</span></div>
    <div class="hold" id="hold" aria-label="Accès au fil"></div>
@@ -63,7 +63,7 @@
   function up(){if(state==='pressing')reset();}
   hold.addEventListener('pointerdown',down);
   ['pointerup','pointerleave','pointercancel'].forEach(t=>hold.addEventListener(t,up));
-  hold.addEventListener('contextmenu',e=>e.preventDefault());
+  d.addEventListener('contextmenu',e=>e.preventDefault());
   reset();
  })();
  </script>
@@ -117,7 +117,7 @@
   </div>
   <div class="plan pro">
    <h3>Pro</h3><div class="price">2,99 € par mois ou 23,99 € par an (soit 1,99 €/mois)</div>
-   <ul><li>Toutes les applications protégées</li><li>Sites web protégés</li><li>Accès limité au fil réglable</li><li>Horaires protégés</li><li>Verrouillage</li><li>Actions positives</li><li>Halos de couleur</li></ul>
+   <ul><li>Toutes les applications protégées</li><li>Sites web protégés</li><li>Accès limité au fil réglable</li><li>Horaires protégés</li><li>Verrouillage</li><li>Actions positives</li></ul>
   </div>
  </div>
 </section>
