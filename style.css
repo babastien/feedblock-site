@@ -18,7 +18,7 @@ h1{font-size:46px;line-height:1.1;margin:0 0 32px;letter-spacing:-.5px}
 .phones{display:flex;gap:16px;justify-content:center}
 .demo{position:relative;width:230px;aspect-ratio:1080/2312;border-radius:18px;overflow:hidden;background:#000;box-shadow:var(--sh0);--k:.72}
 .demo img{position:absolute;inset:0;width:100%;height:100%;display:block}
-.demo .mask{transition:opacity .7s}
+.demo .mask{transition:opacity .7s;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px)}
 .demo .count{position:absolute;left:0;right:0;top:62.11%;transform:translateY(-.5em);text-align:center;font-weight:700;font-size:calc(12.5px * var(--k));line-height:1;transition:opacity .7s}
 .demo .ct{color:rgba(245,245,245,.59)}
 .demo .ct.on{color:#fff}
@@ -106,6 +106,7 @@ footer a:hover{color:var(--text)}
 .contact{background:var(--card);border-radius:16px;padding:20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .small{color:var(--muted);font-size:14px}
 
-@media (hover:hover){.demo:hover{transform:scale(1.08)}}
-.demo.pressing,.demo.open{transform:scale(1.08)}
+@media (hover:hover){.demo:hover{transform:scale(1.07);--sh0:0 0 0 3px #252a2f,0 0 22px rgba(255,255,255,.05)}}
+.demo.pressing,.demo.open{transform:scale(1.07)}
 .demo{--sh0:0 0 0 3px #252a2f}
+.demo::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px #252a2f;pointer-events:none;z-index:5}

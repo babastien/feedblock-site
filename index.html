@@ -35,7 +35,7 @@
  </div>
  <div class="phones">
   <div class="demo" id="demo" role="img" aria-label="Écran de blocage de FeedBlock sur Instagram : un appui long sur le sablier ouvre le fil pour un temps limité">
-   <img src="fil.jpg" alt="" draggable="false">
+   <img class="fil" src="fil.jpg" alt="" draggable="false" style="visibility:hidden">
    <img class="mask" src="masque.jpg" alt="" draggable="false">
    <div class="count"><span class="cw"><span class="ct">Accès au fil · Reste 15 min</span><i class="track"><b></b></i></span></div>
    <div class="pill"><small>Restant</small><span class="pt">15:00</span></div>
@@ -47,7 +47,7 @@
  // Démonstration lancée par l'utilisateur (comme dans l'application) : maintenir le sablier 5 s ouvre le fil 15 min ;
  // ici le fil se referme après quelques secondes pour pouvoir recommencer. Positions relevées sur les captures 1080 x 2312.
  (function(){
-  const d=document.getElementById('demo'),mask=d.querySelector('.mask'),count=d.querySelector('.count'),ct=d.querySelector('.ct'),
+  const d=document.getElementById('demo'),mask=d.querySelector('.mask'),fil=d.querySelector('.fil'),count=d.querySelector('.count'),ct=d.querySelector('.ct'),
    track=d.querySelector('.track'),fill=track.firstChild,pill=d.querySelector('.pill'),pt=d.querySelector('.pt'),
    hold=document.getElementById('hold');
   const size=()=>d.style.setProperty('--k',d.clientWidth/360);size();addEventListener('resize',size);
@@ -57,9 +57,11 @@
    cancelAnimationFrame(raf);state='idle';d.classList.remove('pressing','open');
    mask.style.opacity=1;count.style.opacity=1;pill.style.visibility='hidden';
    ct.textContent='Accès au fil · Reste 15 min';ct.classList.remove('on');track.style.visibility='hidden';fill.style.transform='scaleX(0)';
+   // Fil caché sous l'écran bloqué une fois recouvert : ses bords se voyaient autour du téléphone agrandi.
+   setTimeout(()=>{if(state==='idle')fil.style.visibility='hidden';},800);
   }
   async function open(){
-   state='open';d.classList.remove('pressing');d.classList.add('open');mask.style.opacity=0;count.style.opacity=0;
+   state='open';fil.style.visibility='visible';d.classList.remove('pressing');d.classList.add('open');mask.style.opacity=0;count.style.opacity=0;
    let s=900;pt.textContent='15:00';await wait(700);pill.style.visibility='visible';
    for(let i=0;i<6;i++){await wait(1000);s--;pt.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
    reset();
