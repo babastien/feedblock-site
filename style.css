@@ -26,9 +26,12 @@ h1{font-size:46px;line-height:1.1;margin:0 0 18px;letter-spacing:-.5px}
 .demo .pill{position:absolute;left:0;top:50.04%;width:16.11%;aspect-ratio:1;transform:translateY(-50%);border-radius:50%;background:rgba(20,22,25,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:700;visibility:hidden;line-height:1.1}
 .demo .pill small{font-weight:400;color:#dce0e4;font-size:calc(360px * var(--k) * .0242)}
 .demo .pill .pt{font-size:calc(360px * var(--k) * .0387)}
-.demo .hand{position:absolute;width:20%;left:calc(50% - 20% * 10 / 24);top:calc(72.49% - 20% * 1080 / 2312 * 2.5 / 24);transform-origin:41.7% 10.4%;opacity:0;transform:translate(90%,90%);transition:opacity .35s,transform .35s}
-.demo .hand.in{opacity:1;transform:none}
-.demo .hand.in.down{transform:scale(.92);transition:transform .12s}
+.demo{cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.demo .hold{position:absolute;left:50%;top:72.49%;width:26%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;touch-action:none}
+.hint{color:var(--muted);font-size:13.5px;text-align:center;margin-top:14px;line-height:1.9}
+.hg{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--card2);align-items:center;justify-content:center;vertical-align:middle;margin:0 2px}
+.hg img{width:14px;height:14px}
+.phones{flex-direction:column;align-items:center}
 section{padding:56px 0}
 h2{font-size:30px;margin:0 0 10px}
 .sub{color:var(--muted);margin:0 0 28px;max-width:640px}
@@ -52,7 +55,7 @@ h2{font-size:30px;margin:0 0 10px}
 .ico svg{width:20px;height:20px;fill:none;stroke:var(--text);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .feature b{display:block;font-size:16px}
 .feature span{color:var(--muted);font-size:14.5px}
-.plans{display:grid;grid-template-columns:1fr 1.25fr;gap:14px;max-width:860px}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:860px}
 .plan{background:var(--card);border-radius:18px;padding:22px}
 .plan.pro{box-shadow:0 0 0 2px rgba(46,204,150,.45)}
 .plan h3{margin:0 0 4px;font-size:20px}
@@ -66,15 +69,21 @@ footer a{text-decoration:none}
 footer a:hover{color:var(--text)}
 @media (max-width:760px){
  .hero{grid-template-columns:1fr;padding-top:20px}
- h1{font-size:34px}
+ h1{font-size:28px}
+ .lead{font-size:16px;margin-bottom:20px}
+ h2{font-size:23px}
+ section{padding:40px 0}
+ .sub,.keep,.questions p{font-size:15px}
+ .note{font-size:13px}
+ .feature b{font-size:15px}
+ .feature span,.plan ul{font-size:14px}
  nav a{margin-left:12px;font-size:13.5px}
  .brand{font-size:17px;gap:8px}
  .brand img{width:28px;height:28px}
  .price{font-size:3.15vw}
  .plans{grid-template-columns:minmax(0,1fr)}
- .apps{grid-template-columns:repeat(10,1fr);gap:8px}
- .app{grid-column:span 2;font-size:11px;overflow-wrap:normal}
- .app:nth-child(6){grid-column:2 / span 2}
+ .apps{grid-template-columns:repeat(3,1fr);gap:8px}
+ .app{font-size:12.5px;overflow-wrap:normal}
  .demo{width:220px}
  .privacy{flex-direction:column;align-items:flex-start}
 }
