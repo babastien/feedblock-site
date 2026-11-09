@@ -81,7 +81,7 @@ footer a:hover{color:var(--text)}
  .feature b{font-size:15px}
  .feature span,.plan ul,.privacy p{font-size:14px}
  nav a{margin-left:10px;font-size:13px}
- header nav a.lang{padding:1px 6px;font-size:12px}
+ header nav a.lang{height:22px;padding:0 6px 1px;font-size:12px}
  .brand{font-size:17px;gap:8px}
  .brand img{width:28px;height:28px}
  .price{font-size:3.15vw}
@@ -111,6 +111,7 @@ footer a:hover{color:var(--text)}
 .demo.pressing,.demo.open{transform:scale(1.07)}
 .demo{--sh0:0 0 0 3px #252a2f}
 .demo::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px #252a2f;pointer-events:none;z-index:5}
-nav a.lang{border:1px solid var(--outline);border-radius:8px;padding:2px 8px;font-size:13px}
+nav a.lang{display:inline-flex;align-items:center;height:24px;box-sizing:border-box;line-height:1;border:1px solid var(--outline);border-radius:8px;padding:0 8px 1px;font-size:13px;transition:border-color .15s,color .15s}
+nav a.lang:hover{border-color:var(--text)}
 .frnote{color:var(--muted);font-size:13.5px;margin:14px 0 0;max-width:520px}
 @media (max-width:420px){nav a:first-child{display:none}}
