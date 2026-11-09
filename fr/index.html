@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FeedBlock · Bloque les fils et les vidéos courtes</title>
+<meta name="description" content="FeedBlock bloque les fils et les vidéos courtes de tes applications, sans bloquer le reste.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FeedBlock">
+<meta property="og:title" content="FeedBlock · Bloque les fils et les vidéos courtes">
+<meta property="og:description" content="FeedBlock bloque les fils et les vidéos courtes de tes applications, sans bloquer le reste.">
+<meta property="og:url" content="https://feedblock.app/fr/">
+<meta property="og:image" content="https://feedblock.app/partage.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://feedblock.app/">
+<link rel="alternate" hreflang="fr" href="https://feedblock.app/fr/">
+<link rel="alternate" hreflang="x-default" href="https://feedblock.app/">
+<link rel="icon" href="/favicon.svg">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+ <a class="brand" href="/fr/"><img src="/logo.svg" alt="">FeedBlock</a>
+ <nav><a href="/fr/">Accueil</a><a href="/fr/aide">Aide</a><a href="/fr/confidentialite">Confidentialité</a><a class="lang" href="/" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a></nav>
+</header>
+
+<div class="hero">
+ <div>
+  <h1>Garde tes applications,<br>pas les distractions</h1>
+  <p class="lead">FeedBlock te protège du défilement sans fin des Reels, Shorts et autres fils, tout en préservant les fonctionnalités utiles de tes applications.</p>
+  <p class="lead">Les fils ne s'affichent plus automatiquement lorsque tu ouvres une application : c'est toi qui décides quand et combien de temps y accéder.</p>
+  <a class="btn off">Bientôt sur Google Play</a>
+  <div class="note"><svg class="droid" viewBox="0 0 24 24" aria-hidden="true"><path fill="#3DDC84" d="M2.5,18A9.5,9.5 0 0 1 21.5,18Z"/><path stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round" d="M6.6,10.4L4.8,7.4M17.4,10.4L19.2,7.4"/><circle cx="8" cy="14.3" r="1.15" fill="#0b0d0f"/><circle cx="16" cy="14.3" r="1.15" fill="#0b0d0f"/></svg>Android uniquement</div>
+ </div>
+ <div class="phones">
+  <div class="demo" id="demo" role="img" aria-label="Écran de blocage de FeedBlock sur Instagram : un appui long sur le sablier ouvre le fil pour un temps limité">
+   <img class="fil" src="/fil.jpg" alt="" draggable="false" style="visibility:hidden">
+   <img class="mask" src="/masque.jpg" alt="" draggable="false">
+   <div class="count"><span class="cw"><span class="ct">Accès au fil · Reste 15 min</span><i class="track"><b></b></i></span></div>
+   <div class="pill"><small>Restant</small><span class="pt">15:00</span></div>
+   <div class="hold" id="hold" aria-label="Accès au fil"></div>
+  </div>
+  <div class="hint">Aperçu d'une application protégée par FeedBlock<br>Maintiens ton doigt sur <span class="hg"><img src="/icons/ic_free_time.svg" alt="le sablier"></span> pour ouvrir le fil</div>
+ </div>
+ <script>
+ // Démonstration lancée par l'utilisateur (comme dans l'application) : maintenir le sablier 5 s ouvre le fil 15 min ;
+ // ici le fil se referme après quelques secondes pour pouvoir recommencer. Positions relevées sur les captures 1080 x 2312.
+ (function(){
+  const d=document.getElementById('demo'),mask=d.querySelector('.mask'),fil=d.querySelector('.fil'),count=d.querySelector('.count'),ct=d.querySelector('.ct'),
+   track=d.querySelector('.track'),fill=track.firstChild,pill=d.querySelector('.pill'),pt=d.querySelector('.pt'),
+   hold=document.getElementById('hold');
+  const size=()=>d.style.setProperty('--k',d.clientWidth/360);size();addEventListener('resize',size);
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  let state='idle',raf=0;
+  function reset(){
+   cancelAnimationFrame(raf);state='idle';d.classList.remove('pressing','open');
+   mask.style.opacity=1;count.style.opacity=1;pill.style.visibility='hidden';
+   ct.textContent='Accès au fil · Reste 15 min';ct.classList.remove('on');track.style.visibility='hidden';fill.style.transform='scaleX(0)';
+   // Fil caché sous l'écran bloqué une fois recouvert : ses bords se voyaient autour du téléphone agrandi.
+   setTimeout(()=>{if(state==='idle')fil.style.visibility='hidden';},800);
+  }
+  async function open(){
+   state='open';fil.style.visibility='visible';d.classList.remove('pressing');d.classList.add('open');mask.style.opacity=0;count.style.opacity=0;
+   let s=900;pt.textContent='15:00';await wait(700);pill.style.visibility='visible';
+   for(let i=0;i<6;i++){await wait(1000);s--;pt.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+   reset();
+  }
+  function down(e){
+   if(state!=='idle')return;e.preventDefault();state='pressing';d.classList.add('pressing');
+   ct.classList.add('on');track.style.visibility='visible';const t0=performance.now();
+   (function step(){const k=Math.min(1,(performance.now()-t0)/5000);ct.textContent='Accès au fil dans '+Math.max(1,Math.ceil(5-k*5));fill.style.transform='scaleX('+k+')';
+    if(k>=1)open();else raf=requestAnimationFrame(step);})();
+  }
+  function up(){if(state==='pressing')reset();}
+  hold.addEventListener('pointerdown',down);
+  ['pointerup','pointerleave','pointercancel'].forEach(t=>hold.addEventListener(t,up));
+  d.addEventListener('contextmenu',e=>e.preventDefault());
+  reset();
+ })();
+ </script>
+</div>
+
+<section>
+ <h2>Pourquoi utiliser FeedBlock ?</h2>
+ <div class="questions">
+  <p>Tu passes trop de temps sur ton téléphone et tu aimerais changer ça ?</p>
+  <p>Tu aimerais continuer à suivre tes comptes préférés sans subir les autres contenus qu'on t'impose ?</p>
+  <p>Tu veux pouvoir rester en contact avec tes amis, repartager ou créer des publications sans te faire happer par le défilement sans fin ?</p>
+  <b>FeedBlock est fait pour toi.</b>
+ </div>
+</section>
+
+<section>
+ <h2 style="margin-bottom:28px">Les applications prises en charge</h2>
+ <div class="apps">
+  <div class="app"><div aria-hidden="true" class="tile ig">IG</div>Instagram</div>
+  <div class="app"><div aria-hidden="true" class="tile" style="background:#0866ff">FB</div>Facebook</div>
+  <div class="app"><div aria-hidden="true" class="tile yt"><svg viewBox="0 0 34 34"><path fill="#ff0033" d="M9.2,7.59 C11.8,7.2 22.2,7.2 24.8,7.59 Q30.13,7.85 30.2,13.05 C30.65,14.25 30.65,19.75 30.2,20.95 Q30.13,26.15 24.8,26.41 C22.2,26.8 11.8,26.8 9.2,26.41 Q3.87,26.15 3.81,20.95 C3.35,19.75 3.35,14.25 3.81,13.05 Q3.87,7.85 9.2,7.59Z"/><text x="17" y="21.4" font-size="10.5" font-weight="700" fill="#fff" text-anchor="middle">YT</text></svg></div>YouTube</div>
+  <div class="app"><div aria-hidden="true" class="tile tt"><svg viewBox="0 0 34 34"><text x="16.2" y="20.8" font-size="12.75" font-weight="800" fill="#25F4EE" text-anchor="middle">TT</text><text x="17.8" y="22.4" font-size="12.75" font-weight="800" fill="#FE2C55" text-anchor="middle">TT</text><text x="17" y="21.6" font-size="12.75" font-weight="800" fill="#fff" text-anchor="middle">TT</text></svg></div>TikTok</div>
+  <div class="app"><div aria-hidden="true" class="tile sc" style="background:#fffc00">SC</div>Snapchat</div>
+  <div class="app"><div aria-hidden="true" class="tile" style="background:#000">X</div>X</div>
+  <div class="app"><div aria-hidden="true" class="tile" style="background:#0a66c2">IN</div>LinkedIn</div>
+  <div class="app"><div aria-hidden="true" class="tile" style="background:#e60023">P</div>Pinterest</div>
+  <div class="app"><div aria-hidden="true" class="tile" style="background:#ff4500">R</div>Reddit</div>
+ </div>
+ <p class="keep">Messages, recherche, profils, notifications et publication restent toujours accessibles sur chacune des applications.</p>
+</section>
+
+<section id="fonctions">
+ <h2 style="margin-bottom:28px">Comment FeedBlock va t'aider</h2>
+ <div class="features">
+  <div class="feature"><div class="ico"><img src="/icons/ic_tab_protection.svg" alt=""></div><div><b>Applications protégées</b><span>Les fils et les vidéos courtes des applications choisies sont bloqués.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_web.svg" alt=""></div><div><b>Sites web protégés</b><span>Les versions web des applications sont aussi bloquées dans les navigateurs.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_free_time.svg" alt=""></div><div><b>Accès limité au fil</b><span>Un temps par jour où tu peux ouvrir le fil de manière consciente.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_protected_hours.svg" alt=""></div><div><b>Horaires protégés</b><span>Des créneaux horaires que tu définis, où l'accès au fil reste impossible.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_lock.svg" alt=""></div><div><b>Verrouillage</b><span>Empêche d'arrêter ou de modifier la protection sur un coup de tête.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_idea.svg" alt=""></div><div><b>Actions positives</b><span>Des choses à faire à la place de défiler, proposées sur l'écran de blocage.</span></div></div>
+ </div>
+</section>
+
+<section id="prix">
+ <h2>Free ou Pro</h2>
+ <p class="sub">Essai Pro gratuit pendant 7 jours : rien n'est prélevé avant la fin de l'essai.</p>
+ <div class="plans">
+  <div class="plan">
+   <h3>Free</h3><div class="price">Gratuit (sans limite de durée)</div>
+   <ul><li>1 application protégée</li><li>Accès limité au fil (1 h par jour)</li><li>Statistiques</li></ul>
+  </div>
+  <div class="plan pro">
+   <h3>Pro</h3><div class="price">2,99 € par mois ou 23,99 € par an (soit 1,99 €/mois)</div>
+   <ul><li>Toutes les applications protégées</li><li>Sites web protégés</li><li>Accès limité au fil réglable</li><li>Horaires protégés</li><li>Verrouillage</li><li>Actions positives</li><li>Statistiques</li></ul>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="privacy">
+  <div class="ico" style="width:46px;height:46px"><img src="/icons/confidentialite.svg" alt="" style="width:24px;height:24px"></div>
+  <p>Tes données restent privées et ne quittent jamais ton appareil. <a href="/fr/confidentialite">En savoir plus</a></p>
+ </div>
+</section>
+
+<footer>
+ <span>© 2026 FeedBlock</span>
+ <span><a href="/fr/aide">Aide</a> · <a href="/fr/confidentialite">Confidentialité</a> · <a href="/fr/mentions-legales">Mentions légales</a> · <a href="/fr/conditions">Conditions</a> · <a href="mailto:support@feedblock.app">support@feedblock.app</a></span>
+</footer>
+</div>
+</body>
+</html>

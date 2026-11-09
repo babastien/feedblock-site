@@ -1,47 +1,52 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FeedBlock · Bloque les fils et les vidéos courtes</title>
-<meta name="description" content="FeedBlock bloque les fils et les vidéos courtes de tes applications, sans bloquer le reste.">
+<title>FeedBlock · Block feeds and short videos</title>
+<meta name="description" content="FeedBlock blocks the feeds and short videos in your apps, without blocking anything else.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FeedBlock">
-<meta property="og:title" content="FeedBlock · Bloque les fils et les vidéos courtes">
-<meta property="og:description" content="FeedBlock bloque les fils et les vidéos courtes de tes applications, sans bloquer le reste.">
+<meta property="og:title" content="FeedBlock · Block feeds and short videos">
+<meta property="og:description" content="FeedBlock blocks the feeds and short videos in your apps, without blocking anything else.">
 <meta property="og:url" content="https://feedblock.app/">
-<meta property="og:image" content="https://feedblock.app/partage.png">
+<meta property="og:image" content="https://feedblock.app/partage-en.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="fr_FR">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://feedblock.app/">
+<link rel="alternate" hreflang="fr" href="https://feedblock.app/fr/">
+<link rel="alternate" hreflang="x-default" href="https://feedblock.app/">
 <link rel="icon" href="/favicon.svg">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/style.css">
+<script>try{if(!localStorage.getItem('lang')&&/^fr\b/i.test(navigator.language||''))location.replace('/fr/')}catch(e){}</script>
 </head>
 <body>
 <div class="wrap">
 <header>
- <a class="brand" href="/"><img src="logo.svg" alt="">FeedBlock</a>
- <nav><a href="/">Accueil</a><a href="/aide">Aide</a><a href="/confidentialite">Confidentialité</a></nav>
+ <a class="brand" href="/"><img src="/logo.svg" alt="">FeedBlock</a>
+ <nav><a href="/">Home</a><a href="/help">Help</a><a href="/privacy">Privacy</a><a class="lang" href="/fr/" hreflang="fr" onclick="try{localStorage.setItem('lang','fr')}catch(e){}">FR</a></nav>
 </header>
 
 <div class="hero">
  <div>
-  <h1>Garde tes applications,<br>pas les distractions</h1>
-  <p class="lead">FeedBlock te protège du défilement sans fin des Reels, Shorts et autres fils, tout en préservant les fonctionnalités utiles de tes applications.</p>
-  <p class="lead">Les fils ne s'affichent plus automatiquement lorsque tu ouvres une application : c'est toi qui décides quand et combien de temps y accéder.</p>
-  <a class="btn off">Bientôt sur Google Play</a>
-  <div class="note"><svg class="droid" viewBox="0 0 24 24" aria-hidden="true"><path fill="#3DDC84" d="M2.5,18A9.5,9.5 0 0 1 21.5,18Z"/><path stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round" d="M6.6,10.4L4.8,7.4M17.4,10.4L19.2,7.4"/><circle cx="8" cy="14.3" r="1.15" fill="#0b0d0f"/><circle cx="16" cy="14.3" r="1.15" fill="#0b0d0f"/></svg>Android uniquement</div>
+  <h1>Keep what you need,<br>not the feed</h1>
+  <p class="lead">FeedBlock protects you from the endless scrolling of Reels, Shorts and other feeds, while keeping the useful features of your apps.</p>
+  <p class="lead">Feeds no longer show up automatically when you open an app: you decide when, and for how long, you access them.</p>
+  <a class="btn off">Coming soon to Google Play</a>
+  <div class="note"><svg class="droid" viewBox="0 0 24 24" aria-hidden="true"><path fill="#3DDC84" d="M2.5,18A9.5,9.5 0 0 1 21.5,18Z"/><path stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round" d="M6.6,10.4L4.8,7.4M17.4,10.4L19.2,7.4"/><circle cx="8" cy="14.3" r="1.15" fill="#0b0d0f"/><circle cx="16" cy="14.3" r="1.15" fill="#0b0d0f"/></svg>Android only</div>
+  <p class="frnote">FeedBlock is currently available in French only. An English version is coming soon.</p>
  </div>
  <div class="phones">
-  <div class="demo" id="demo" role="img" aria-label="Écran de blocage de FeedBlock sur Instagram : un appui long sur le sablier ouvre le fil pour un temps limité">
-   <img class="fil" src="fil.jpg" alt="" draggable="false" style="visibility:hidden">
-   <img class="mask" src="masque.jpg" alt="" draggable="false">
+  <div class="demo" id="demo" role="img" aria-label="FeedBlock block screen on Instagram: a long press on the hourglass opens the feed for a limited time">
+   <img class="fil" src="/fil.jpg" alt="" draggable="false" style="visibility:hidden">
+   <img class="mask" src="/masque.jpg" alt="" draggable="false">
    <div class="count"><span class="cw"><span class="ct">Accès au fil · Reste 15 min</span><i class="track"><b></b></i></span></div>
    <div class="pill"><small>Restant</small><span class="pt">15:00</span></div>
-   <div class="hold" id="hold" aria-label="Accès au fil"></div>
+   <div class="hold" id="hold" aria-label="Feed access"></div>
   </div>
-  <div class="hint">Aperçu d'une application protégée par FeedBlock<br>Maintiens ton doigt sur <span class="hg"><img src="icons/ic_free_time.svg" alt="le sablier"></span> pour ouvrir le fil</div>
+  <div class="hint">Preview of an app protected by FeedBlock (in French)<br>Hold your finger on <span class="hg"><img src="/icons/ic_free_time.svg" alt="the hourglass"></span> to open the feed</div>
  </div>
  <script>
  // Démonstration lancée par l'utilisateur (comme dans l'application) : maintenir le sablier 5 s ouvre le fil 15 min ;
@@ -82,17 +87,17 @@
 </div>
 
 <section>
- <h2>Pourquoi utiliser FeedBlock ?</h2>
+ <h2>Why use FeedBlock?</h2>
  <div class="questions">
-  <p>Tu passes trop de temps sur ton téléphone et tu aimerais changer ça ?</p>
-  <p>Tu aimerais continuer à suivre tes comptes préférés sans subir les autres contenus qu'on t'impose ?</p>
-  <p>Tu veux pouvoir rester en contact avec tes amis, repartager ou créer des publications sans te faire happer par le défilement sans fin ?</p>
-  <b>FeedBlock est fait pour toi.</b>
+  <p>You spend too much time on your phone and would like to change that?</p>
+  <p>You want to keep following your favorite accounts without being fed everything else?</p>
+  <p>You want to stay in touch with your friends, share or create posts without getting sucked into endless scrolling?</p>
+  <b>FeedBlock is made for you.</b>
  </div>
 </section>
 
 <section>
- <h2 style="margin-bottom:28px">Les applications prises en charge</h2>
+ <h2 style="margin-bottom:28px">Supported apps</h2>
  <div class="apps">
   <div class="app"><div aria-hidden="true" class="tile ig">IG</div>Instagram</div>
   <div class="app"><div aria-hidden="true" class="tile" style="background:#0866ff">FB</div>Facebook</div>
@@ -104,46 +109,46 @@
   <div class="app"><div aria-hidden="true" class="tile" style="background:#e60023">P</div>Pinterest</div>
   <div class="app"><div aria-hidden="true" class="tile" style="background:#ff4500">R</div>Reddit</div>
  </div>
- <p class="keep">Messages, recherche, profils, notifications et publication restent toujours accessibles sur chacune des applications.</p>
+ <p class="keep">Messages, search, profiles, notifications and posting always stay available in every app.</p>
 </section>
 
 <section id="fonctions">
- <h2 style="margin-bottom:28px">Comment FeedBlock va t'aider</h2>
+ <h2 style="margin-bottom:28px">How FeedBlock helps</h2>
  <div class="features">
-  <div class="feature"><div class="ico"><img src="icons/ic_tab_protection.svg" alt=""></div><div><b>Applications protégées</b><span>Les fils et les vidéos courtes des applications choisies sont bloqués.</span></div></div>
-  <div class="feature"><div class="ico"><img src="icons/ic_web.svg" alt=""></div><div><b>Sites web protégés</b><span>Les versions web des applications sont aussi bloquées dans les navigateurs.</span></div></div>
-  <div class="feature"><div class="ico"><img src="icons/ic_free_time.svg" alt=""></div><div><b>Accès limité au fil</b><span>Un temps par jour où tu peux ouvrir le fil de manière consciente.</span></div></div>
-  <div class="feature"><div class="ico"><img src="icons/ic_protected_hours.svg" alt=""></div><div><b>Horaires protégés</b><span>Des créneaux horaires que tu définis, où l'accès au fil reste impossible.</span></div></div>
-  <div class="feature"><div class="ico"><img src="icons/ic_lock.svg" alt=""></div><div><b>Verrouillage</b><span>Empêche d'arrêter ou de modifier la protection sur un coup de tête.</span></div></div>
-  <div class="feature"><div class="ico"><img src="icons/ic_idea.svg" alt=""></div><div><b>Actions positives</b><span>Des choses à faire à la place de défiler, proposées sur l'écran de blocage.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_tab_protection.svg" alt=""></div><div><b>Protected apps</b><span>Feeds and short videos in the apps you choose are blocked.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_web.svg" alt=""></div><div><b>Protected websites</b><span>The web versions of these apps are blocked in browsers too.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_free_time.svg" alt=""></div><div><b>Limited feed access</b><span>A daily amount of time to open the feed mindfully.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_protected_hours.svg" alt=""></div><div><b>Protected hours</b><span>Time slots you set, when feed access is not possible.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_lock.svg" alt=""></div><div><b>Lock</b><span>Stops you from turning off or changing your protection on a whim.</span></div></div>
+  <div class="feature"><div class="ico"><img src="/icons/ic_idea.svg" alt=""></div><div><b>Positive actions</b><span>Things to do instead of scrolling, suggested on the block screen.</span></div></div>
  </div>
 </section>
 
 <section id="prix">
- <h2>Free ou Pro</h2>
- <p class="sub">Essai Pro gratuit pendant 7 jours : rien n'est prélevé avant la fin de l'essai.</p>
+ <h2>Free or Pro</h2>
+ <p class="sub">Free 7-day Pro trial: nothing is charged before the trial ends.</p>
  <div class="plans">
   <div class="plan">
-   <h3>Free</h3><div class="price">Gratuit (sans limite de durée)</div>
-   <ul><li>1 application protégée</li><li>Accès limité au fil (1 h par jour)</li><li>Statistiques</li></ul>
+   <h3>Free</h3><div class="price">Free (forever)</div>
+   <ul><li>1 protected app</li><li>Limited feed access (1 hour a day)</li><li>Statistics</li></ul>
   </div>
   <div class="plan pro">
-   <h3>Pro</h3><div class="price">2,99 € par mois ou 23,99 € par an (soit 1,99 €/mois)</div>
-   <ul><li>Toutes les applications protégées</li><li>Sites web protégés</li><li>Accès limité au fil réglable</li><li>Horaires protégés</li><li>Verrouillage</li><li>Actions positives</li><li>Statistiques</li></ul>
+   <h3>Pro</h3><div class="price">€2.99 a month or €23.99 a year (€1.99/month)</div>
+   <ul><li>All apps protected</li><li>Protected websites</li><li>Adjustable feed access</li><li>Protected hours</li><li>Lock</li><li>Positive actions</li><li>Statistics</li></ul>
   </div>
  </div>
 </section>
 
 <section>
  <div class="privacy">
-  <div class="ico" style="width:46px;height:46px"><img src="icons/confidentialite.svg" alt="" style="width:24px;height:24px"></div>
-  <p>Tes données restent privées et ne quittent jamais ton appareil. <a href="/confidentialite">En savoir plus</a></p>
+  <div class="ico" style="width:46px;height:46px"><img src="/icons/confidentialite.svg" alt="" style="width:24px;height:24px"></div>
+  <p>Your data stays private and never leaves your device. <a href="/privacy">Learn more</a></p>
  </div>
 </section>
 
 <footer>
  <span>© 2026 FeedBlock</span>
- <span><a href="/aide">Aide</a> · <a href="/confidentialite">Confidentialité</a> · <a href="/mentions-legales">Mentions légales</a> · <a href="/conditions">Conditions</a> · <a href="mailto:support@feedblock.app">support@feedblock.app</a></span>
+ <span><a href="/help">Help</a> · <a href="/privacy">Privacy</a> · <a href="/legal">Legal notice</a> · <a href="/terms">Terms</a> · <a href="mailto:support@feedblock.app">support@feedblock.app</a></span>
 </footer>
 </div>
 </body>
